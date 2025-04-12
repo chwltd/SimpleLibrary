@@ -53,76 +53,12 @@ import java.util.List;
 
 public class SystemUtils {
 
-	private static Toast toast = null;
-
 	public static void CHToast(Context context,String text){
 		SimpleToast.show(context,text);
 	}
 
 	public static void CHToast(Context context,String text,int y){
 		SimpleToast.show(context,text,Gravity.CENTER,y);
-	}
-
-	public static void CHToast(Context context,String text,String color){
-		if(toast == null) {
-			toast = new Toast(context);
-		}
-		toast.setGravity(Gravity.CENTER, 0, 0);
-		toast.setDuration(Toast.LENGTH_LONG);
-		toast.setView(getToastView(context,text,color));
-		toast.show();
-	}
-
-	public static void CHToast(Context context,String text,String color,int y){
-		if(toast == null) {
-			toast = new Toast(context);
-		}
-		toast.setGravity(Gravity.CENTER, 0, y);
-		toast.setDuration(Toast.LENGTH_LONG);
-		toast.setView(getToastView(context,text,color));
-		toast.show();
-	}
-
-	public static View getToastView(Context context,String text){
-		int padding = SystemUtils.dp2px(15);
-		int radius = SystemUtils.dp2px(10);
-		LinearLayout linearLayout = new LinearLayout(context);
-		linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-		linearLayout.setPadding(padding,padding,padding,padding);
-		TextView textView = new TextView(context);
-		textView.setText(text);
-		textView.setTextColor(Color.parseColor("#ffffff"));
-		textView.setTextSize(16);
-		textView.setMaxLines(2);
-		textView.setEllipsize(TextUtils.TruncateAt.END);
-		linearLayout.addView(textView);
-		GradientDrawable gradientDrawable = new GradientDrawable();
-		gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-		gradientDrawable.setColor(Color.parseColor("#cc666666"));
-		gradientDrawable.setCornerRadius(radius);
-		linearLayout.setBackground(gradientDrawable);
-		return linearLayout;
-	}
-
-	public static View getToastView(Context context,String text,String color){
-		int padding = SystemUtils.dp2px(15);
-		int radius = SystemUtils.dp2px(10);
-		LinearLayout linearLayout = new LinearLayout(context);
-		linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-		linearLayout.setPadding(padding,padding,padding,padding);
-		TextView textView = new TextView(context);
-		textView.setText(text);
-		textView.setTextColor(Color.parseColor("#ffffff"));
-		textView.setTextSize(16);
-		textView.setMaxLines(2);
-		textView.setEllipsize(TextUtils.TruncateAt.END);
-		linearLayout.addView(textView);
-		GradientDrawable gradientDrawable = new GradientDrawable();
-		gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-		gradientDrawable.setColor(Color.parseColor(color));
-		gradientDrawable.setCornerRadius(radius);
-		linearLayout.setBackground(gradientDrawable);
-		return linearLayout;
 	}
 
 	/**
