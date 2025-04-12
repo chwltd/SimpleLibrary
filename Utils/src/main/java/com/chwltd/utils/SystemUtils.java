@@ -42,6 +42,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.chwltd.function.toast.SimpleToast;
+
 import dalvik.system.DexClassLoader;
 import java.io.File;
 import java.lang.reflect.Field;
@@ -53,23 +56,11 @@ public class SystemUtils {
 	private static Toast toast = null;
 
 	public static void CHToast(Context context,String text){
-		if(toast == null) {
-			toast = new Toast(context);
-		}
-		toast.setGravity(Gravity.CENTER, 0, 0);
-		toast.setDuration(Toast.LENGTH_LONG);
-		toast.setView(getToastView(context,text));
-		toast.show();
+		SimpleToast.show(context,text);
 	}
 
 	public static void CHToast(Context context,String text,int y){
-		if(toast == null) {
-			toast = new Toast(context);
-		}
-		toast.setGravity(Gravity.CENTER, 0, y);
-		toast.setDuration(Toast.LENGTH_LONG);
-		toast.setView(getToastView(context,text));
-		toast.show();
+		SimpleToast.show(context,text,Gravity.CENTER,y);
 	}
 
 	public static void CHToast(Context context,String text,String color){

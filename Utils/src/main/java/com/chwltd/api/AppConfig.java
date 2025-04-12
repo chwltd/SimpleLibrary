@@ -1,6 +1,8 @@
 package com.chwltd.api;
 
 import java.lang.*;
+
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.Color;
@@ -53,6 +55,8 @@ public class AppConfig {
     public static String themePostLabelBgColor;
     //称号颜色数据
     public static String userTitleColorData = "{\"测试\":{\"TextColor\":\"#ffffff\",\"TitleColor\":\"#2196F3\"}}";
+    //全局字体配置
+    public static Typeface themeTypeface;
 
     public static void setTheme(boolean type){
         setTheme(type,themeOnColor,themeOffColor);
