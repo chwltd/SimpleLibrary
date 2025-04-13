@@ -49,7 +49,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.chwltd'
                 artifactId = 'Utils'
-                version = '0.0.2'
+                version = '0.0.3'
             }
         }
     }
