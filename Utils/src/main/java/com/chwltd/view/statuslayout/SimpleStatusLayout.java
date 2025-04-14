@@ -17,6 +17,12 @@ import com.chwltd.utils.ImageUtils;
 import com.chwltd.utils.SystemUtils;
 
 public class SimpleStatusLayout extends LinearLayout {
+    //底部内边距
+    private int bottomPadding = 0;
+    //顶部内边距
+    private int topPadding = 0;
+    //状态布局监听
+    public SimpleStatusListener listener;
     //状态布局根布局
     private RelativeLayout statusRootView;
     //加载中布局
@@ -114,6 +120,11 @@ public class SimpleStatusLayout extends LinearLayout {
         addView(statusRootView);
         //初始化加载中布局
         initLoadingView();
+        statusRootView.setPadding(0, topPadding,0, bottomPadding);
+    }
+
+    public void initPadding() {
+        statusRootView.setPadding(0, topPadding,0, bottomPadding);
     }
 
     //初始化加载中布局
@@ -155,6 +166,7 @@ public class SimpleStatusLayout extends LinearLayout {
         autoTransition.setDuration(500);
         TransitionManager.beginDelayedTransition(view, autoTransition);
         statusRootView.setVisibility(GONE);
+        listener.onHide();
     }
 
     private void showView(ViewGroup view) {
@@ -162,5 +174,52 @@ public class SimpleStatusLayout extends LinearLayout {
         autoTransition.setDuration(500);
         TransitionManager.beginDelayedTransition(view, autoTransition);
         view.setVisibility(VISIBLE);
+    }
+
+    public void setSimpleStatusListener(SimpleStatusListener listener) {
+        this.listener = listener;
+    }
+
+    public int getTopPadding() {
+        return topPadding;
+    }
+
+    public void setTopPadding(int topPadding) {
+        this.topPadding = topPadding;
+        initPadding();
+    }
+
+    public void setTopMargin(ViewGroup viewGroup) {
+        this.topPadding = viewGroup.getHeight();
+        initPadding();
+    }
+
+    public void setTopMargin(View view) {
+        this.topPadding = view.getHeight();
+        initPadding();
+    }
+
+    public int getBottomPadding() {
+        return bottomPadding;
+    }
+
+    public void setBottomPadding(int bottomPadding) {
+        this.bottomPadding = bottomPadding;
+        initPadding();
+    }
+
+    public void setBottomMargin(ViewGroup viewGroup) {
+        this.bottomPadding = viewGroup.getHeight();
+        initPadding();
+    }
+
+    public void setBottomMargin(View view) {
+        this.bottomPadding = view.getHeight();
+        initPadding();
+    }
+
+    public interface SimpleStatusListener {
+        void onStartLoadEvent();
+        void onHide();
     }
 }
