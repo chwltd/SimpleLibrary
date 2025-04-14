@@ -158,21 +158,16 @@ public class SimpleStatusLayout extends LinearLayout {
     }
 
     public void hide() {
-        hideView(statusRootView);
+        hideView();
     }
 
-    private void hideView(ViewGroup view) {
-        AutoTransition autoTransition = new AutoTransition();
-        autoTransition.setDuration(500);
-        TransitionManager.beginDelayedTransition(view, autoTransition);
+    private void hideView() {
+        currentView.setVisibility(GONE);
         statusRootView.setVisibility(GONE);
         listener.onHide();
     }
 
     private void showView(ViewGroup view) {
-        AutoTransition autoTransition = new AutoTransition();
-        autoTransition.setDuration(500);
-        TransitionManager.beginDelayedTransition(view, autoTransition);
         view.setVisibility(VISIBLE);
     }
 
