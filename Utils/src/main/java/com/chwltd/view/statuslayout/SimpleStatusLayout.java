@@ -1,6 +1,8 @@
 package com.chwltd.view.statuslayout;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
+import com.chwltd.api.AppConfig;
 import com.chwltd.utils.ImageUtils;
 import com.chwltd.utils.SystemUtils;
 
@@ -29,23 +32,27 @@ public class SimpleStatusLayout extends LinearLayout {
     private LinearLayout loadingView;
     private ImageView loadingImageView;
     private TextView loadingTextView;
-    private String loadingLottie = "{\"v\":\"5.5.6\",\"fr\":29.9700012207031,\"ip\":0,\"op\":102.000004154545,\"w\":1920,\"h\":1080,\"nm\":\"Comp 1\",\"ddd\":0,\"assets\":[],\"layers\":[{\"ddd\":0,\"ind\":1,\"ty\":4,\"nm\":\"Load Outlines\",\"sr\":1,\"ks\":{\"o\":{\"a\":0,\"k\":100,\"ix\":11},\"r\":{\"a\":0,\"k\":0,\"ix\":10},\"p\":{\"a\":0,\"k\":[960,540,0],\"ix\":2},\"a\":{\"a\":0,\"k\":[1518,1004.5,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[51.515,51.515,100],\"ix\":6}},\"ao\":0,\"shapes\":[{\"ty\":\"gr\",\"it\":[{\"ind\":0,\"ty\":\"sh\",\"ix\":1,\"ks\":{\"a\":0,\"k\":{\"i\":[[0,-190.771],[0,0],[-192.192,0],[0,0],[0,192.192],[0,0],[0,0],[190.767,0],[0,0]],\"o\":[[0,0],[0,192.192],[0,0],[192.192,0],[0,0],[0,0],[0,-190.767],[0,0],[-190.77,0]],\"v\":[[-347.995,-338.72],[-347.995,336.15],[0,684.141],[0,684.141],[347.995,336.15],[347.995,-334.141],[347.995,-338.726],[2.58,-684.141],[-2.575,-684.141]],\"c\":true},\"ix\":2},\"nm\":\"Path 1\",\"mn\":\"ADBE Vector Shape - Group\",\"hd\":false},{\"ty\":\"tm\",\"s\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":14,\"s\":[50]},{\"t\":43.0000017514259,\"s\":[0]}],\"ix\":1},\"e\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":14,\"s\":[69]},{\"t\":43.0000017514259,\"s\":[19]}],\"ix\":2},\"o\":{\"a\":0,\"k\":0,\"ix\":3},\"m\":1,\"ix\":2,\"nm\":\"Trim Paths 1\",\"mn\":\"ADBE Vector Filter - Trim\",\"hd\":false},{\"ty\":\"st\",\"c\":{\"a\":0,\"k\":[0.1294,0.5882,0.9529,1],\"ix\":3},\"o\":{\"a\":0,\"k\":100,\"ix\":4},\"w\":{\"a\":0,\"k\":173.862,\"ix\":5},\"lc\":2,\"lj\":1,\"ml\":10,\"bm\":0,\"nm\":\"Stroke 1\",\"mn\":\"ADBE Vector Graphic - Stroke\",\"hd\":false},{\"ty\":\"tr\",\"p\":{\"a\":0,\"k\":[1673.182,1042.438],\"ix\":2},\"a\":{\"a\":0,\"k\":[0,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[100,100],\"ix\":3},\"r\":{\"a\":0,\"k\":0,\"ix\":6},\"o\":{\"a\":0,\"k\":100,\"ix\":7},\"sk\":{\"a\":0,\"k\":0,\"ix\":4},\"sa\":{\"a\":0,\"k\":0,\"ix\":5},\"nm\":\"Transform\"}],\"nm\":\"Group 1\",\"np\":3,\"cix\":2,\"bm\":0,\"ix\":1,\"mn\":\"ADBE Vector Group\",\"hd\":false},{\"ty\":\"gr\",\"it\":[{\"ind\":0,\"ty\":\"sh\",\"ix\":1,\"ks\":{\"a\":0,\"k\":{\"i\":[[0,233.258],[-193.632,0],[0,0],[0,-193.632],[0,0],[0,0],[190.723,0],[0,0],[0,190.724],[0,0]],\"o\":[[0,-193.632],[0,0],[193.633,0],[0,0],[0,0],[0,190.724],[0,0],[-190.724,0],[0,0],[0,-149.566]],\"v\":[[-350.603,-334.046],[-0.001,-684.641],[0,-684.641],[350.603,-334.046],[350.603,334.722],[350.603,339.305],[5.267,684.641],[-5.267,684.641],[-350.603,339.305],[-350.603,334.722]],\"c\":true},\"ix\":2},\"nm\":\"Path 1\",\"mn\":\"ADBE Vector Shape - Group\",\"hd\":false},{\"ty\":\"tm\",\"s\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":0,\"s\":[81]},{\"t\":30.0000012219251,\"s\":[31]}],\"ix\":1},\"e\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":0,\"s\":[100]},{\"t\":30.0000012219251,\"s\":[50]}],\"ix\":2},\"o\":{\"a\":0,\"k\":0,\"ix\":3},\"m\":1,\"ix\":2,\"nm\":\"Trim Paths 1\",\"mn\":\"ADBE Vector Filter - Trim\",\"hd\":false},{\"ty\":\"st\",\"c\":{\"a\":0,\"k\":[1,0.4,0.6,1],\"ix\":3},\"o\":{\"a\":0,\"k\":100,\"ix\":4},\"w\":{\"a\":0,\"k\":173.862,\"ix\":5},\"lc\":2,\"lj\":1,\"ml\":10,\"bm\":0,\"nm\":\"Stroke 1\",\"mn\":\"ADBE Vector Graphic - Stroke\",\"hd\":false},{\"ty\":\"tr\",\"p\":{\"a\":0,\"k\":[1327.383,1042.938],\"ix\":2},\"a\":{\"a\":0,\"k\":[0,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[100,100],\"ix\":3},\"r\":{\"a\":0,\"k\":-180,\"ix\":6},\"o\":{\"a\":0,\"k\":100,\"ix\":7},\"sk\":{\"a\":0,\"k\":0,\"ix\":4},\"sa\":{\"a\":0,\"k\":0,\"ix\":5},\"nm\":\"Transform\"}],\"nm\":\"Group 2\",\"np\":3,\"cix\":2,\"bm\":0,\"ix\":2,\"mn\":\"ADBE Vector Group\",\"hd\":false},{\"ty\":\"gr\",\"it\":[{\"ind\":0,\"ty\":\"sh\",\"ix\":1,\"ks\":{\"a\":0,\"k\":{\"i\":[[0,233.258],[-193.632,0],[0,0],[0,-193.632],[0,0],[0,0],[190.723,0],[0,0],[0,190.724],[0,0]],\"o\":[[0,-193.632],[0,0],[193.633,0],[0,0],[0,0],[0,190.724],[0,0],[-190.724,0],[0,0],[0,-149.566]],\"v\":[[-350.603,-334.046],[-0.001,-684.641],[0,-684.641],[350.603,-334.046],[350.603,334.722],[350.603,339.305],[5.267,684.641],[-5.267,684.641],[-350.603,339.305],[-350.603,334.722]],\"c\":true},\"ix\":2},\"nm\":\"Path 1\",\"mn\":\"ADBE Vector Shape - Group\",\"hd\":false},{\"ty\":\"tm\",\"s\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":0,\"s\":[81]},{\"t\":30.0000012219251,\"s\":[31]}],\"ix\":1},\"e\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":0,\"s\":[100]},{\"t\":30.0000012219251,\"s\":[50]}],\"ix\":2},\"o\":{\"a\":0,\"k\":0,\"ix\":3},\"m\":1,\"ix\":2,\"nm\":\"Trim Paths 1\",\"mn\":\"ADBE Vector Filter - Trim\",\"hd\":false},{\"ty\":\"st\",\"c\":{\"a\":0,\"k\":[0.3216,0.8,0.6,1],\"ix\":3},\"o\":{\"a\":0,\"k\":100,\"ix\":4},\"w\":{\"a\":0,\"k\":173.862,\"ix\":5},\"lc\":2,\"lj\":1,\"ml\":10,\"bm\":0,\"nm\":\"Stroke 1\",\"mn\":\"ADBE Vector Graphic - Stroke\",\"hd\":false},{\"ty\":\"tr\",\"p\":{\"a\":0,\"k\":[1327.383,1042.938],\"ix\":2},\"a\":{\"a\":0,\"k\":[0,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[100,100],\"ix\":3},\"r\":{\"a\":0,\"k\":0,\"ix\":6},\"o\":{\"a\":0,\"k\":100,\"ix\":7},\"sk\":{\"a\":0,\"k\":0,\"ix\":4},\"sa\":{\"a\":0,\"k\":0,\"ix\":5},\"nm\":\"Transform\"}],\"nm\":\"Group 4\",\"np\":3,\"cix\":2,\"bm\":0,\"ix\":4,\"mn\":\"ADBE Vector Group\",\"hd\":false},{\"ty\":\"tm\",\"s\":{\"a\":0,\"k\":0,\"ix\":1},\"e\":{\"a\":0,\"k\":100,\"ix\":2},\"o\":{\"a\":0,\"k\":0,\"ix\":3},\"m\":1,\"ix\":5,\"nm\":\"Trim Paths 1\",\"mn\":\"ADBE Vector Filter - Trim\",\"hd\":false}],\"ip\":0,\"op\":46.0000018736184,\"st\":0,\"bm\":0},{\"ddd\":0,\"ind\":2,\"ty\":4,\"nm\":\"Load2 Outlines\",\"sr\":1,\"ks\":{\"o\":{\"a\":0,\"k\":100,\"ix\":11},\"r\":{\"a\":0,\"k\":0,\"ix\":10},\"p\":{\"a\":0,\"k\":[960,540,0],\"ix\":2},\"a\":{\"a\":0,\"k\":[1518,1004.5,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[51.375,51.375,100],\"ix\":6}},\"ao\":0,\"shapes\":[{\"ty\":\"gr\",\"it\":[{\"ind\":0,\"ty\":\"sh\",\"ix\":1,\"ks\":{\"a\":0,\"k\":{\"i\":[[0,0],[-192.192,0],[0,0],[0,192.192],[0,0],[190.767,0],[0,0],[0,-190.771]],\"o\":[[0,192.192],[0,0],[192.192,0],[0,0],[0,-190.768],[0,0],[-190.77,0],[0,0]],\"v\":[[-347.995,336.15],[0,684.141],[0,684.141],[347.995,336.15],[347.995,-338.725],[2.58,-684.141],[-2.575,-684.141],[-347.995,-338.72]],\"c\":true},\"ix\":2},\"nm\":\"Path 1\",\"mn\":\"ADBE Vector Shape - Group\",\"hd\":false},{\"ty\":\"tm\",\"s\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":14,\"s\":[81]},{\"t\":43.0000017514259,\"s\":[31]}],\"ix\":1},\"e\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":14,\"s\":[100]},{\"t\":43.0000017514259,\"s\":[50]}],\"ix\":2},\"o\":{\"a\":0,\"k\":0,\"ix\":3},\"m\":1,\"ix\":2,\"nm\":\"Trim Paths 1\",\"mn\":\"ADBE Vector Filter - Trim\",\"hd\":false},{\"ty\":\"st\",\"c\":{\"a\":0,\"k\":[1,0.502,0.4,1],\"ix\":3},\"o\":{\"a\":0,\"k\":100,\"ix\":4},\"w\":{\"a\":0,\"k\":173.862,\"ix\":5},\"lc\":2,\"lj\":1,\"ml\":10,\"bm\":0,\"nm\":\"Stroke 1\",\"mn\":\"ADBE Vector Graphic - Stroke\",\"hd\":false},{\"ty\":\"tr\",\"p\":{\"a\":0,\"k\":[1673.182,1042.438],\"ix\":2},\"a\":{\"a\":0,\"k\":[0,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[100,100],\"ix\":3},\"r\":{\"a\":0,\"k\":0,\"ix\":6},\"o\":{\"a\":0,\"k\":100,\"ix\":7},\"sk\":{\"a\":0,\"k\":0,\"ix\":4},\"sa\":{\"a\":0,\"k\":0,\"ix\":5},\"nm\":\"Transform\"}],\"nm\":\"Group 1\",\"np\":3,\"cix\":2,\"bm\":0,\"ix\":1,\"mn\":\"ADBE Vector Group\",\"hd\":false}],\"ip\":0,\"op\":46.0000018736184,\"st\":0,\"bm\":0},{\"ddd\":0,\"ind\":3,\"ty\":4,\"nm\":\"Load3 Outlines\",\"sr\":1,\"ks\":{\"o\":{\"a\":0,\"k\":100,\"ix\":11},\"r\":{\"a\":0,\"k\":0,\"ix\":10},\"p\":{\"a\":0,\"k\":[960,539,0],\"ix\":2},\"a\":{\"a\":0,\"k\":[1518,1004.5,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[51.5,51.5,100],\"ix\":6}},\"ao\":0,\"shapes\":[{\"ty\":\"gr\",\"it\":[{\"ind\":0,\"ty\":\"sh\",\"ix\":1,\"ks\":{\"a\":0,\"k\":{\"i\":[[0,190.724],[0,233.258],[-193.633,0],[0,0],[0,-193.632],[0,0],[0,0],[190.724,0],[0,0]],\"o\":[[0,0],[0,-193.632],[0,0],[193.632,0],[0,0],[0,0],[0,190.724],[0,0],[-190.724,0]],\"v\":[[-350.603,339.305],[-350.603,-334.046],[0,-684.641],[0.001,-684.641],[350.603,-334.046],[350.603,334.722],[350.603,339.305],[5.267,684.641],[-5.267,684.641]],\"c\":true},\"ix\":2},\"nm\":\"Path 1\",\"mn\":\"ADBE Vector Shape - Group\",\"hd\":false},{\"ty\":\"tm\",\"s\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":52,\"s\":[50]},{\"t\":82.0000033399285,\"s\":[0]}],\"ix\":1},\"e\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":52,\"s\":[69]},{\"t\":82.0000033399285,\"s\":[19]}],\"ix\":2},\"o\":{\"a\":0,\"k\":0,\"ix\":3},\"m\":1,\"ix\":2,\"nm\":\"Trim Paths 1\",\"mn\":\"ADBE Vector Filter - Trim\",\"hd\":false},{\"ty\":\"st\",\"c\":{\"a\":0,\"k\":[0.3216,0.8,0.6,1],\"ix\":3},\"o\":{\"a\":0,\"k\":100,\"ix\":4},\"w\":{\"a\":0,\"k\":173.862,\"ix\":5},\"lc\":2,\"lj\":1,\"ml\":10,\"bm\":0,\"nm\":\"Stroke 1\",\"mn\":\"ADBE Vector Graphic - Stroke\",\"hd\":false},{\"ty\":\"tr\",\"p\":{\"a\":0,\"k\":[1327.382,1042.938],\"ix\":2},\"a\":{\"a\":0,\"k\":[0,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[100,100],\"ix\":3},\"r\":{\"a\":0,\"k\":0,\"ix\":6},\"o\":{\"a\":0,\"k\":100,\"ix\":7},\"sk\":{\"a\":0,\"k\":0,\"ix\":4},\"sa\":{\"a\":0,\"k\":0,\"ix\":5},\"nm\":\"Transform\"}],\"nm\":\"Group 4\",\"np\":3,\"cix\":2,\"bm\":0,\"ix\":1,\"mn\":\"ADBE Vector Group\",\"hd\":false}],\"ip\":45.0000018328876,\"op\":103.000004195276,\"st\":7.00000028511585,\"bm\":0},{\"ddd\":0,\"ind\":4,\"ty\":4,\"nm\":\"Load3 Outlines\",\"sr\":1,\"ks\":{\"o\":{\"a\":0,\"k\":100,\"ix\":11},\"r\":{\"a\":0,\"k\":180,\"ix\":10},\"p\":{\"a\":0,\"k\":[764,580,0],\"ix\":2},\"a\":{\"a\":0,\"k\":[1518,1004.5,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[51.5,51.5,100],\"ix\":6}},\"ao\":0,\"shapes\":[{\"ty\":\"gr\",\"it\":[{\"ind\":0,\"ty\":\"sh\",\"ix\":1,\"ks\":{\"a\":0,\"k\":{\"i\":[[0,190.724],[0,233.258],[-193.633,0],[0,0],[0,-193.632],[0,0],[0,0],[190.724,0],[0,0]],\"o\":[[0,0],[0,-193.632],[0,0],[193.632,0],[0,0],[0,0],[0,190.724],[0,0],[-190.724,0]],\"v\":[[-350.603,339.305],[-350.603,-334.046],[0,-684.641],[0.001,-684.641],[350.603,-334.046],[350.603,334.722],[350.603,339.305],[5.267,684.641],[-5.267,684.641]],\"c\":true},\"ix\":2},\"nm\":\"Path 1\",\"mn\":\"ADBE Vector Shape - Group\",\"hd\":false},{\"ty\":\"st\",\"c\":{\"a\":0,\"k\":[1,0.4,0.6,1],\"ix\":3},\"o\":{\"a\":0,\"k\":100,\"ix\":4},\"w\":{\"a\":0,\"k\":173.862,\"ix\":5},\"lc\":2,\"lj\":1,\"ml\":10,\"bm\":0,\"nm\":\"Stroke 1\",\"mn\":\"ADBE Vector Graphic - Stroke\",\"hd\":false},{\"ty\":\"tr\",\"p\":{\"a\":0,\"k\":[1327.382,1042.938],\"ix\":2},\"a\":{\"a\":0,\"k\":[0,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[100,100],\"ix\":3},\"r\":{\"a\":0,\"k\":0,\"ix\":6},\"o\":{\"a\":0,\"k\":100,\"ix\":7},\"sk\":{\"a\":0,\"k\":0,\"ix\":4},\"sa\":{\"a\":0,\"k\":0,\"ix\":5},\"nm\":\"Transform\"}],\"nm\":\"Group 2\",\"np\":2,\"cix\":2,\"bm\":0,\"ix\":1,\"mn\":\"ADBE Vector Group\",\"hd\":false},{\"ty\":\"tm\",\"s\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":52,\"s\":[50]},{\"t\":82.0000033399285,\"s\":[0]}],\"ix\":1},\"e\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":52,\"s\":[69]},{\"t\":82.0000033399285,\"s\":[19]}],\"ix\":2},\"o\":{\"a\":0,\"k\":0,\"ix\":3},\"m\":1,\"ix\":2,\"nm\":\"Trim Paths 1\",\"mn\":\"ADBE Vector Filter - Trim\",\"hd\":false}],\"ip\":45.0000018328876,\"op\":103.000004195276,\"st\":-3.00000012219251,\"bm\":0},{\"ddd\":0,\"ind\":5,\"ty\":4,\"nm\":\"Load3 Outlines\",\"sr\":1,\"ks\":{\"o\":{\"a\":0,\"k\":100,\"ix\":11},\"r\":{\"a\":0,\"k\":0,\"ix\":10},\"p\":{\"a\":0,\"k\":[960,540,0],\"ix\":2},\"a\":{\"a\":0,\"k\":[1518,1004.5,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[51.5,51.5,100],\"ix\":6}},\"ao\":0,\"shapes\":[{\"ty\":\"gr\",\"it\":[{\"ind\":0,\"ty\":\"sh\",\"ix\":1,\"ks\":{\"a\":0,\"k\":{\"i\":[[0,0],[-192.192,0],[0,0],[0,192.192],[0,0],[0,0],[190.767,0],[0,0],[0,-190.771]],\"o\":[[0,192.192],[0,0],[192.192,0],[0,0],[0,0],[0,-190.768],[0,0],[-190.77,0],[0,0]],\"v\":[[-347.995,336.15],[0,684.141],[0,684.141],[347.995,336.15],[347.995,-334.141],[347.995,-338.725],[2.58,-684.141],[-2.575,-684.141],[-347.995,-338.72]],\"c\":true},\"ix\":2},\"nm\":\"Path 1\",\"mn\":\"ADBE Vector Shape - Group\",\"hd\":false},{\"ty\":\"tm\",\"s\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":66,\"s\":[81]},{\"t\":96.0000039101602,\"s\":[31]}],\"ix\":1},\"e\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":66,\"s\":[100]},{\"t\":96.0000039101602,\"s\":[50]}],\"ix\":2},\"o\":{\"a\":0,\"k\":0,\"ix\":3},\"m\":1,\"ix\":2,\"nm\":\"Trim Paths 1\",\"mn\":\"ADBE Vector Filter - Trim\",\"hd\":false},{\"ty\":\"st\",\"c\":{\"a\":0,\"k\":[0.1294,0.5882,0.9529,1],\"ix\":3},\"o\":{\"a\":0,\"k\":100,\"ix\":4},\"w\":{\"a\":0,\"k\":173.862,\"ix\":5},\"lc\":2,\"lj\":1,\"ml\":10,\"bm\":0,\"nm\":\"Stroke 1\",\"mn\":\"ADBE Vector Graphic - Stroke\",\"hd\":false},{\"ty\":\"tr\",\"p\":{\"a\":0,\"k\":[1673.182,1042.438],\"ix\":2},\"a\":{\"a\":0,\"k\":[0,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[100,100],\"ix\":3},\"r\":{\"a\":0,\"k\":0,\"ix\":6},\"o\":{\"a\":0,\"k\":100,\"ix\":7},\"sk\":{\"a\":0,\"k\":0,\"ix\":4},\"sa\":{\"a\":0,\"k\":0,\"ix\":5},\"nm\":\"Transform\"}],\"nm\":\"Group 1\",\"np\":3,\"cix\":2,\"bm\":0,\"ix\":1,\"mn\":\"ADBE Vector Group\",\"hd\":false}],\"ip\":45.0000018328876,\"op\":103.000004195276,\"st\":3.00000012219251,\"bm\":0},{\"ddd\":0,\"ind\":6,\"ty\":4,\"nm\":\"Load3 Outlines\",\"sr\":1,\"ks\":{\"o\":{\"a\":0,\"k\":100,\"ix\":11},\"r\":{\"a\":0,\"k\":-180,\"ix\":10},\"p\":{\"a\":0,\"k\":[1120,570,0],\"ix\":2},\"a\":{\"a\":0,\"k\":[1518,1004.5,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[51.5,51.5,100],\"ix\":6}},\"ao\":0,\"shapes\":[{\"ty\":\"gr\",\"it\":[{\"ind\":0,\"ty\":\"sh\",\"ix\":1,\"ks\":{\"a\":0,\"k\":{\"i\":[[0,0],[-192.192,0],[0,0],[0,192.192],[0,0],[0,0],[190.767,0],[0,0],[0,-190.771]],\"o\":[[0,192.192],[0,0],[192.192,0],[0,0],[0,0],[0,-190.768],[0,0],[-190.77,0],[0,0]],\"v\":[[-347.995,336.15],[0,684.141],[0,684.141],[347.995,336.15],[347.995,-334.141],[347.995,-338.725],[2.58,-684.141],[-2.575,-684.141],[-347.995,-338.72]],\"c\":true},\"ix\":2},\"nm\":\"Path 1\",\"mn\":\"ADBE Vector Shape - Group\",\"hd\":false},{\"ty\":\"tm\",\"s\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":66,\"s\":[81]},{\"t\":96.0000039101602,\"s\":[31]}],\"ix\":1},\"e\":{\"a\":1,\"k\":[{\"i\":{\"x\":[0.667],\"y\":[1]},\"o\":{\"x\":[0.333],\"y\":[0]},\"t\":66,\"s\":[100]},{\"t\":96.0000039101602,\"s\":[50]}],\"ix\":2},\"o\":{\"a\":0,\"k\":0,\"ix\":3},\"m\":1,\"ix\":2,\"nm\":\"Trim Paths 1\",\"mn\":\"ADBE Vector Filter - Trim\",\"hd\":false},{\"ty\":\"st\",\"c\":{\"a\":0,\"k\":[1,0.502,0.4,1],\"ix\":3},\"o\":{\"a\":0,\"k\":100,\"ix\":4},\"w\":{\"a\":0,\"k\":173.862,\"ix\":5},\"lc\":2,\"lj\":1,\"ml\":10,\"bm\":0,\"nm\":\"Stroke 1\",\"mn\":\"ADBE Vector Graphic - Stroke\",\"hd\":false},{\"ty\":\"tr\",\"p\":{\"a\":0,\"k\":[1673.182,1022.438],\"ix\":2},\"a\":{\"a\":0,\"k\":[0,0],\"ix\":1},\"s\":{\"a\":0,\"k\":[100,100],\"ix\":3},\"r\":{\"a\":0,\"k\":0,\"ix\":6},\"o\":{\"a\":0,\"k\":100,\"ix\":7},\"sk\":{\"a\":0,\"k\":0,\"ix\":4},\"sa\":{\"a\":0,\"k\":0,\"ix\":5},\"nm\":\"Transform\"}],\"nm\":\"Group 3\",\"np\":3,\"cix\":2,\"bm\":0,\"ix\":1,\"mn\":\"ADBE Vector Group\",\"hd\":false}],\"ip\":45.0000018328876,\"op\":103.000004195276,\"st\":3.00000012219251,\"bm\":0}],\"markers\":[]}";
+    private String loadingLottie = AppConfig.themeLoadingLottie;
     //空布局
     private LinearLayout emptyView;
     private ImageView emptyImageView;
     private TextView emptyTextView;
+    private String emptyLottie = AppConfig.themeEmptyLottie;
     //错误布局
     private LinearLayout errorView;
     private ImageView errorImageView;
     private TextView errorTextView;
+    private String errorLottie = AppConfig.themeErrorLottie;
     //网络错误布局
     private LinearLayout networkErrorView;
     private ImageView networkErrorImageView;
     private TextView networkErrorTextView;
+    private String networkErrorLottie = AppConfig.themeNetworkErrorLottie;
     //无权限布局
     private LinearLayout noPermissionView;
     private ImageView noPermissionImageView;
     private TextView noPermissionTextView;
+    private String noPermissionLottie = AppConfig.themeNoPermissionLottie;
     //无数据布局
     private LinearLayout noDataView;
     private ImageView noDataImageView;
@@ -117,14 +124,38 @@ public class SimpleStatusLayout extends LinearLayout {
         statusRootView.addView(noPermissionView);
         statusRootView.addView(noDataView);
         statusRootView.addView(customView);
+        //设置背景颜色
+        statusRootView.setBackgroundColor(Color.parseColor(AppConfig.themeBgColor));
         addView(statusRootView);
-        //初始化加载中布局
-        initLoadingView();
+        //初始化子布局
+        initSubView();
         statusRootView.setPadding(0, topPadding,0, bottomPadding);
+        setSimpleStatusListener(new SimpleStatusListener() {
+            @Override
+            public void onStartEvent(String eventName) {
+
+            }
+
+            @Override
+            public void onHide() {
+
+            }
+        });
     }
 
     public void initPadding() {
         statusRootView.setPadding(0, topPadding,0, bottomPadding);
+    }
+
+    private void initSubView(){
+        //初始化加载中布局
+        initLoadingView();
+        //初始化空布局
+        initEmptyView();
+        //初始化错误布局
+        initErrorView();
+        //初始化网络错误布局
+        initNetworkErrorView();
     }
 
     //初始化加载中布局
@@ -137,10 +168,110 @@ public class SimpleStatusLayout extends LinearLayout {
         loadingView.addView(loadingImageView);
         loadingView.addView(loadingTextView);
         //设置布局参数
-        loadingImageView.setLayoutParams(new LayoutParams(screenWidth/3, screenHeight/3));
+        loadingImageView.setLayoutParams(new LayoutParams(screenWidth/3, ViewGroup.LayoutParams.WRAP_CONTENT));
         loadingTextView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         //加载动画
         ImageUtils.playLottie(loadingImageView,loadingLottie);
+    }
+
+    //初始化空布局
+    private void initEmptyView() {
+        emptyView.setOrientation(VERTICAL);
+        emptyView.setGravity(Gravity.CENTER);
+        //初始化布局
+        emptyImageView = new ImageView(getContext());
+        emptyTextView = new TextView(getContext());
+        emptyTextView.setText("空空如也");
+        emptyTextView.setTextSize(14);
+        emptyTextView.setTextColor(Color.parseColor(AppConfig.themeContentColor));
+        emptyTextView.setMaxLines(1);
+        emptyTextView.setEllipsize(TextUtils.TruncateAt.END);
+        emptyTextView.setTypeface(AppConfig.themeTypeface);
+        emptyView.addView(emptyImageView);
+        emptyView.addView(emptyTextView);
+        //设置布局参数
+        emptyImageView.setLayoutParams(new LayoutParams(screenWidth/3, ViewGroup.LayoutParams.WRAP_CONTENT));
+        LinearLayout.LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        int margin = SystemUtils.dp2px(5);
+        params.setMargins(margin, margin, margin, margin);
+        emptyTextView.setLayoutParams(params);
+        //加载动画
+        ImageUtils.playLottie(emptyImageView,emptyLottie);
+    }
+
+    //初始化错误布局
+    private void initErrorView() {
+        errorView.setOrientation(VERTICAL);
+        errorView.setGravity(Gravity.CENTER);
+        //初始化布局
+        errorImageView = new ImageView(getContext());
+        errorTextView = new TextView(getContext());
+        errorTextView.setText("加载失败，点击重新加载");
+        errorTextView.setTextSize(14);
+        errorTextView.setTextColor(Color.parseColor(AppConfig.themeContentColor));
+        errorTextView.setMaxLines(1);
+        errorTextView.setEllipsize(TextUtils.TruncateAt.END);
+        errorTextView.setTypeface(AppConfig.themeTypeface);
+        errorView.addView(errorImageView);
+        errorView.addView(errorTextView);
+        //设置布局参数
+        errorImageView.setLayoutParams(new LayoutParams(screenWidth/3, screenWidth/3));
+        LinearLayout.LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        int margin = SystemUtils.dp2px(5);
+        params.setMargins(margin, margin, margin, margin);
+        errorTextView.setLayoutParams(params);
+        //加载动画
+        ImageUtils.playLottie(errorImageView,errorLottie);
+    }
+
+    //初始化网络错误布局
+    private void initNetworkErrorView() {
+        networkErrorView.setOrientation(VERTICAL);
+        networkErrorView.setGravity(Gravity.CENTER);
+        //初始化布局
+        networkErrorImageView = new ImageView(getContext());
+        networkErrorTextView = new TextView(getContext());
+        networkErrorTextView.setText("网络错误，点击重新加载");
+        networkErrorTextView.setTextSize(14);
+        networkErrorTextView.setTextColor(Color.parseColor(AppConfig.themeContentColor));
+        networkErrorTextView.setMaxLines(1);
+        networkErrorTextView.setEllipsize(TextUtils.TruncateAt.END);
+        networkErrorTextView.setTypeface(AppConfig.themeTypeface);
+        networkErrorView.addView(networkErrorImageView);
+        networkErrorView.addView(networkErrorTextView);
+        //设置布局参数
+        networkErrorImageView.setLayoutParams(new LayoutParams(screenWidth/3, screenWidth/3));
+        LinearLayout.LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        int margin = SystemUtils.dp2px(5);
+        params.setMargins(margin, margin, margin, margin);
+        networkErrorTextView.setLayoutParams(params);
+        //加载动画
+        ImageUtils.playLottie(networkErrorImageView,networkErrorLottie);
+    }
+
+    //初始化无权限布局
+    private void initNoPermissionView() {
+        noPermissionView.setOrientation(VERTICAL);
+        noPermissionView.setGravity(Gravity.CENTER);
+        //初始化布局
+        noPermissionImageView = new ImageView(getContext());
+        noPermissionTextView = new TextView(getContext());
+        noPermissionTextView.setText("无权限，点击申请权限");
+        noPermissionTextView.setTextSize(14);
+        noPermissionTextView.setTextColor(Color.parseColor(AppConfig.themeContentColor));
+        noPermissionTextView.setMaxLines(1);
+        noPermissionTextView.setEllipsize(TextUtils.TruncateAt.END);
+        noPermissionTextView.setTypeface(AppConfig.themeTypeface);
+        noPermissionView.addView(noPermissionImageView);
+        noPermissionView.addView(noPermissionTextView);
+        //设置布局参数
+        noPermissionImageView.setLayoutParams(new LayoutParams(screenWidth/3, screenWidth/3));
+        LinearLayout.LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        int margin = SystemUtils.dp2px(5);
+        params.setMargins(margin, margin, margin, margin);
+        noPermissionTextView.setLayoutParams(params);
+        //加载动画
+        ImageUtils.playLottie(noPermissionImageView,noPermissionLottie);
     }
 
     public void showLoading(boolean status) {
@@ -155,6 +286,56 @@ public class SimpleStatusLayout extends LinearLayout {
         loadingView.setVisibility(VISIBLE);
         currentView = loadingView;
         showView(statusRootView);
+        listener.onStartEvent("showLoading");
+    }
+
+    public void showEmpty() {
+        if(currentView!= null) {
+            currentView.setVisibility(GONE);
+        }
+        emptyView.setVisibility(VISIBLE);
+        currentView = emptyView;
+        showView(statusRootView);
+        listener.onStartEvent("showEmpty");
+    }
+
+    public void showError() {
+        if(currentView!= null) {
+            currentView.setVisibility(GONE);
+        }
+        errorView.setOnClickListener(view -> {
+            showLoading(false);
+        });
+        errorView.setVisibility(VISIBLE);
+        currentView = errorView;
+        showView(statusRootView);
+        listener.onStartEvent("showError");
+    }
+
+    public void showNetworkError() {
+        if(currentView!= null) {
+            currentView.setVisibility(GONE);
+        }
+        networkErrorView.setOnClickListener(view -> {
+            showLoading(false);
+        });
+        networkErrorView.setVisibility(VISIBLE);
+        currentView = networkErrorView;
+        showView(statusRootView);
+        listener.onStartEvent("showNetworkError");
+    }
+
+    public void showNoPermission() {
+        if(currentView!= null) {
+            currentView.setVisibility(GONE);
+        }
+        noPermissionView.setOnClickListener(view -> {
+            listener.onStartEvent("getPermission");
+        });
+        noPermissionView.setVisibility(VISIBLE);
+        currentView = noPermissionView;
+        showView(statusRootView);
+        listener.onStartEvent("showNoPermission");
     }
 
     public void hide() {
@@ -214,7 +395,7 @@ public class SimpleStatusLayout extends LinearLayout {
     }
 
     public interface SimpleStatusListener {
-        void onStartLoadEvent();
+        void onStartEvent(String eventName);
         void onHide();
     }
 }

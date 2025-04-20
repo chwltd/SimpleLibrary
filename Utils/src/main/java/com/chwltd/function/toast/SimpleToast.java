@@ -17,6 +17,10 @@ public class SimpleToast {
         show(context,message,gravity,0,0);
     }
 
+    public static void show(Context context,String message,int gravity,int y,String toastColor) {
+        show(context,message,gravity,0,y,getToastView(context,message,toastColor));
+    }
+
     public static void show(Context context,String message,int gravity,int y) {
         show(context,message,gravity,0,y);
     }

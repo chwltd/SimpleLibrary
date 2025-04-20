@@ -61,6 +61,10 @@ public class SystemUtils {
 		SimpleToast.show(context,text,Gravity.CENTER,y);
 	}
 
+	public static void CHToast(Context context,String text,String toastColor,int y){
+		SimpleToast.show(context,text,Gravity.CENTER,y,toastColor);
+	}
+
 	/**
 	 * 获取屏幕宽度
 	 * @param context 上下文

@@ -38,7 +38,6 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.5.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("com.google.code.gson:gson:2.11.0")
-    implementation("com.squareup.picasso:picasso:2.8")
 }
 
 afterEvaluate {
@@ -49,7 +48,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.chwltd'
                 artifactId = 'Utils'
-                version = '0.0.5'
+                version = '0.0.6'
             }
         }
     }
