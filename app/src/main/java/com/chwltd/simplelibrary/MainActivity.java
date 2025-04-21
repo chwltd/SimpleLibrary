@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onHide() {
+            public void onHideEvent() {
                 SystemUtils.CHToast(MainActivity.this,"关闭了");
             }
         });

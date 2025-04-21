@@ -12,9 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.transition.AutoTransition;
-import androidx.transition.TransitionManager;
-
 import com.chwltd.api.AppConfig;
 import com.chwltd.utils.ImageUtils;
 import com.chwltd.utils.SystemUtils;
@@ -53,10 +50,6 @@ public class SimpleStatusLayout extends LinearLayout {
     private ImageView noPermissionImageView;
     private TextView noPermissionTextView;
     private String noPermissionLottie = AppConfig.themeNoPermissionLottie;
-    //无数据布局
-    private LinearLayout noDataView;
-    private ImageView noDataImageView;
-    private TextView noDataTextView;
     //自定义布局
     private LinearLayout customView;
     //当前显示的布局
@@ -96,7 +89,6 @@ public class SimpleStatusLayout extends LinearLayout {
         errorView = new LinearLayout(getContext());
         networkErrorView = new LinearLayout(getContext());
         noPermissionView = new LinearLayout(getContext());
-        noDataView = new LinearLayout(getContext());
         customView = new LinearLayout(getContext());
         //设置布局参数
         statusRootView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
@@ -105,7 +97,6 @@ public class SimpleStatusLayout extends LinearLayout {
         errorView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         networkErrorView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         noPermissionView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        noDataView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         customView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         //设置布局可视度
         statusRootView.setVisibility(GONE);
@@ -114,7 +105,6 @@ public class SimpleStatusLayout extends LinearLayout {
         errorView.setVisibility(GONE);
         networkErrorView.setVisibility(GONE);
         noPermissionView.setVisibility(GONE);
-        noDataView.setVisibility(GONE);
         customView.setVisibility(GONE);
         //添加布局
         statusRootView.addView(loadingView);
@@ -122,7 +112,6 @@ public class SimpleStatusLayout extends LinearLayout {
         statusRootView.addView(errorView);
         statusRootView.addView(networkErrorView);
         statusRootView.addView(noPermissionView);
-        statusRootView.addView(noDataView);
         statusRootView.addView(customView);
         //设置背景颜色
         statusRootView.setBackgroundColor(Color.parseColor(AppConfig.themeBgColor));
@@ -137,7 +126,7 @@ public class SimpleStatusLayout extends LinearLayout {
             }
 
             @Override
-            public void onHide() {
+            public void onHideEvent() {
 
             }
         });
@@ -276,6 +265,11 @@ public class SimpleStatusLayout extends LinearLayout {
         ImageUtils.playLottie(noPermissionImageView,noPermissionLottie);
     }
 
+    //初始化自定义布局
+    public void initCustomView(ViewGroup viewGroup) {
+        customView.addView(viewGroup);
+    }
+
     public void showLoading(boolean status) {
         if(currentView != null) {
             currentView.setVisibility(GONE);
@@ -289,6 +283,12 @@ public class SimpleStatusLayout extends LinearLayout {
         currentView = loadingView;
         showView(statusRootView);
         listener.onStartEvent("showLoading");
+    }
+
+    public void showLoading(boolean status, String text) {
+        loadingTextView.setText(text);
+        ImageUtils.playLottie(loadingImageView,loadingLottie);
+        showLoading(status);
     }
 
     public void showLoading(boolean status, String text, String lottie) {
@@ -305,6 +305,12 @@ public class SimpleStatusLayout extends LinearLayout {
         currentView = emptyView;
         showView(statusRootView);
         listener.onStartEvent("showEmpty");
+    }
+
+    public void showEmpty(String text) {
+        emptyTextView.setText(text);
+        ImageUtils.playLottie(emptyImageView,emptyLottie);
+        showEmpty();
     }
 
     public void showEmpty(String text, String lottie) {
@@ -326,6 +332,12 @@ public class SimpleStatusLayout extends LinearLayout {
         listener.onStartEvent("showError");
     }
 
+    public void showError(String text) {
+        errorTextView.setText(text);
+        ImageUtils.playLottie(errorImageView,errorLottie);
+        showError();
+    }
+
     public void showError(String text, String lottie) {
         errorTextView.setText(text);
         ImageUtils.playLottie(errorImageView,lottie);
@@ -343,6 +355,12 @@ public class SimpleStatusLayout extends LinearLayout {
         currentView = networkErrorView;
         showView(statusRootView);
         listener.onStartEvent("showNetworkError");
+    }
+
+    public void showNetworkError(String text) {
+        networkErrorTextView.setText(text);
+        ImageUtils.playLottie(networkErrorImageView,networkErrorLottie);
+        showNetworkError();
     }
 
     public void showNetworkError(String text, String lottie) {
@@ -364,10 +382,50 @@ public class SimpleStatusLayout extends LinearLayout {
         listener.onStartEvent("showNoPermission");
     }
 
+    public void showNoPermission(String text) {
+        noPermissionTextView.setText(text);
+        ImageUtils.playLottie(noPermissionImageView,noPermissionLottie);
+        showNoPermission();
+    }
+
     public void showNoPermission(String text, String lottie) {
         noPermissionTextView.setText(text);
         ImageUtils.playLottie(noPermissionImageView,lottie);
         showNoPermission();
+    }
+
+    public void showCustomView() {
+        if(currentView!= null) {
+            currentView.setVisibility(GONE);
+        }
+        customView.setVisibility(VISIBLE);
+        currentView = customView;
+        showView(statusRootView);
+        listener.onStartEvent("showCustomView");
+    }
+
+    public ViewGroup getCustomView() {
+        return customView;
+    }
+
+    public ViewGroup getLoadingView() {
+        return loadingView;
+    }
+
+    public ViewGroup getEmptyView() {
+        return emptyView;
+    }
+
+    public ViewGroup getErrorView() {
+        return errorView;
+    }
+
+    public ViewGroup getNetworkErrorView() {
+        return networkErrorView;
+    }
+
+    public ViewGroup getNoPermissionView() {
+        return noPermissionView;
     }
 
     public void hide() {
@@ -377,7 +435,7 @@ public class SimpleStatusLayout extends LinearLayout {
     private void hideView() {
         currentView.setVisibility(GONE);
         statusRootView.setVisibility(GONE);
-        listener.onHide();
+        listener.onHideEvent();
     }
 
     private void showView(ViewGroup view) {
@@ -397,12 +455,12 @@ public class SimpleStatusLayout extends LinearLayout {
         initPadding();
     }
 
-    public void setTopMargin(ViewGroup viewGroup) {
+    public void setTopPadding(ViewGroup viewGroup) {
         this.topPadding = viewGroup.getHeight();
         initPadding();
     }
 
-    public void setTopMargin(View view) {
+    public void setTopPadding(View view) {
         this.topPadding = view.getHeight();
         initPadding();
     }
@@ -416,18 +474,18 @@ public class SimpleStatusLayout extends LinearLayout {
         initPadding();
     }
 
-    public void setBottomMargin(ViewGroup viewGroup) {
+    public void setBottomPadding(ViewGroup viewGroup) {
         this.bottomPadding = viewGroup.getHeight();
         initPadding();
     }
 
-    public void setBottomMargin(View view) {
+    public void setBottomPadding(View view) {
         this.bottomPadding = view.getHeight();
         initPadding();
     }
 
     public interface SimpleStatusListener {
         void onStartEvent(String eventName);
-        void onHide();
+        void onHideEvent();
     }
 }
