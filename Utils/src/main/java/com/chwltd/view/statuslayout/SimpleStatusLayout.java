@@ -156,6 +156,8 @@ public class SimpleStatusLayout extends LinearLayout {
         initErrorView();
         //初始化网络错误布局
         initNetworkErrorView();
+        //初始化无权限布局
+        initNoPermissionView();
     }
 
     //初始化加载中布局
@@ -289,6 +291,12 @@ public class SimpleStatusLayout extends LinearLayout {
         listener.onStartEvent("showLoading");
     }
 
+    public void showLoading(boolean status, String text, String lottie) {
+        loadingTextView.setText(text);
+        ImageUtils.playLottie(loadingImageView,lottie);
+        showLoading(status);
+    }
+
     public void showEmpty() {
         if(currentView!= null) {
             currentView.setVisibility(GONE);
@@ -297,6 +305,12 @@ public class SimpleStatusLayout extends LinearLayout {
         currentView = emptyView;
         showView(statusRootView);
         listener.onStartEvent("showEmpty");
+    }
+
+    public void showEmpty(String text, String lottie) {
+        emptyTextView.setText(text);
+        ImageUtils.playLottie(emptyImageView,lottie);
+        showEmpty();
     }
 
     public void showError() {
@@ -312,6 +326,12 @@ public class SimpleStatusLayout extends LinearLayout {
         listener.onStartEvent("showError");
     }
 
+    public void showError(String text, String lottie) {
+        errorTextView.setText(text);
+        ImageUtils.playLottie(errorImageView,lottie);
+        showError();
+    }
+
     public void showNetworkError() {
         if(currentView!= null) {
             currentView.setVisibility(GONE);
@@ -325,6 +345,12 @@ public class SimpleStatusLayout extends LinearLayout {
         listener.onStartEvent("showNetworkError");
     }
 
+    public void showNetworkError(String text, String lottie) {
+        networkErrorTextView.setText(text);
+        ImageUtils.playLottie(networkErrorImageView,lottie);
+        showNetworkError();
+    }
+
     public void showNoPermission() {
         if(currentView!= null) {
             currentView.setVisibility(GONE);
@@ -336,6 +362,12 @@ public class SimpleStatusLayout extends LinearLayout {
         currentView = noPermissionView;
         showView(statusRootView);
         listener.onStartEvent("showNoPermission");
+    }
+
+    public void showNoPermission(String text, String lottie) {
+        noPermissionTextView.setText(text);
+        ImageUtils.playLottie(noPermissionImageView,lottie);
+        showNoPermission();
     }
 
     public void hide() {

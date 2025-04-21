@@ -5,7 +5,7 @@ plugins {
 }
 android {
     namespace 'com.chwltd.utils'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         minSdk 26
@@ -48,7 +48,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.chwltd'
                 artifactId = 'Utils'
-                version = '0.0.6'
+                version = '0.0.7'
             }
         }
     }
