@@ -1,6 +1,8 @@
 package com.chwltd.utils;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 
 import com.google.gson.stream.JsonReader;
@@ -12,6 +14,34 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DataUtils {
+
+    public static boolean saveData(Context context, String name, String key, String value) {
+        // 存储
+        SharedPreferences prefs = context.getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        return editor.commit();
+    }
+
+    public static String getValue(Context context,String name, String key) {
+        //读取
+        SharedPreferences prefs = context.getSharedPreferences(name, Context.MODE_PRIVATE);
+        return prefs.getString(key, null);
+    }
+
+    public static boolean removeKey(Context context,String name, String key) {
+        // 清除
+        SharedPreferences prefs = context.getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(key);
+        return editor.commit();
+    }
+
+    /**
+     * 处理时间
+     * @param inputTime 输入时间
+     * @return 处理后的时间
+     */
     @SuppressLint("SimpleDateFormat")
     public static String processTime(String inputTime) {
         try {
