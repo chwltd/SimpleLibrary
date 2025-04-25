@@ -20,6 +20,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="show"/>
+            <Button
+                android:id="@+id/btn2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="发送验证码"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et"/>
+            <Button
+                android:id="@+id/btn3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="注册"/>
             <ProgressBar
                 android:layout_marginTop="100dp"
                 android:id="@+id/progress"

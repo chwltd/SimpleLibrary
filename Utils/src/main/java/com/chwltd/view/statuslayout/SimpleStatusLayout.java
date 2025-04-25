@@ -428,6 +428,14 @@ public class SimpleStatusLayout extends LinearLayout {
         return noPermissionView;
     }
 
+    public RelativeLayout getStatusRootView() {
+        return statusRootView;
+    }
+
+    public void setStatusRootViewBackgroundColor(String color) {
+        statusRootView.setBackgroundColor(Color.parseColor(color));
+    }
+
     public void hide() {
         hideView();
     }

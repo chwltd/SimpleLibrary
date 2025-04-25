@@ -24,6 +24,11 @@ public class OkHttpUtils {
     private static final String TAG = "OkHttpUtils";
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final OkHttpClient client;
+    private static String cookie;
+
+    public static String getCookie() {
+        return cookie;
+    }
 
     static {
         client = new OkHttpClient();
@@ -109,6 +114,53 @@ public class OkHttpUtils {
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
             return "Error in POST request: " + e.getMessage();
+        }
+    }
+
+    // JSON POST 请求
+    public static String postJsonAutoCookie(String url, String jsonData) {
+        CompletableFuture<String> future = new CompletableFuture<>();
+        RequestBody requestBody = RequestBody.create(JSON, jsonData);
+        Request.Builder requestBuilder = new Request.Builder()
+                .url(url)
+                .post(requestBody);
+
+        // 如果有 Cookie，添加到请求头
+        if (cookie != null) {
+            requestBuilder.addHeader("Cookie", cookie);
+        }
+
+        Request request = requestBuilder.build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e(TAG, "POST request failed: " + e.getMessage());
+                future.completeExceptionally(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    try {
+                        // 从响应头中获取并保存 Cookie
+                        List<String> cookies = response.headers("Set-Cookie");
+                        if (!cookies.isEmpty()) {
+                            cookie = cookies.toString(); // 假设只需要第一个 Cookie
+                        }
+                        future.complete(response.body().string());
+                    } catch (IOException e) {
+                        future.completeExceptionally(e);
+                    }
+                } else {
+                    Log.e(TAG, "POST request not successful. Status code: " + response.code());
+                    future.completeExceptionally(new IOException("POST request not successful. Status code: " + response.code()));
+                }
+            }
+        });
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            return "Error in POST JSON request: " + e.getMessage();
         }
     }
 
@@ -404,8 +456,7 @@ public class OkHttpUtils {
                         String responseData = response.body().string();
                         String cookie = response.header("Set-Cookie");
                         if (cookie!= null) {
-                            // 保存 Cookie，可以使用 SharedPreferences 等方式
-                            // 下次请求时自动添加保存的 Cookie
+                            cookie = cookie;
                         }
                         future.complete(responseData);
                     } catch (IOException e) {

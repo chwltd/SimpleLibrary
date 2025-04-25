@@ -20,6 +20,8 @@ public class ApiUtils {
      *
      * */
 
+    private static final OkHttpUtils okHttpUtils = new OkHttpUtils();
+
     //获取APP信息
     public static String getAppInfo() {
         try {
@@ -129,7 +131,7 @@ public class ApiUtils {
             jsonObject.addProperty("captcha", captcha);
             jsonObject.addProperty("timestamp", System.currentTimeMillis());
 
-            return backData(OkHttpUtils.postJson(ApiConfig.getApi() + "login", jsonObject.toString()));
+            return backData(OkHttpUtils.postJsonAutoCookie(ApiConfig.getApi() + "login", jsonObject.toString()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -144,7 +146,7 @@ public class ApiUtils {
             jsonObject.addProperty("type", type);
             jsonObject.addProperty("timestamp", System.currentTimeMillis());
 
-            return backData(OkHttpUtils.postJson(ApiConfig.getApi() + "get_image_verification_code", jsonObject.toString()));
+            return backData(OkHttpUtils.postJsonAutoCookie(ApiConfig.getApi() + "get_image_verification_code", jsonObject.toString()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -162,7 +164,7 @@ public class ApiUtils {
             jsonObject.addProperty("captcha", captcha);
             jsonObject.addProperty("timestamp", System.currentTimeMillis());
 
-            return backData(OkHttpUtils.postJson(ApiConfig.getApi() + "mobile_login", jsonObject.toString()));
+            return backData(OkHttpUtils.postJsonAutoCookie(ApiConfig.getApi() + "mobile_login", jsonObject.toString()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -178,7 +180,7 @@ public class ApiUtils {
             jsonObject.addProperty("type", type);
             jsonObject.addProperty("timestamp", System.currentTimeMillis());
 
-            return backData(OkHttpUtils.postJson(ApiConfig.getApi() + "get_mobile_verification_code", jsonObject.toString()));
+            return backData(OkHttpUtils.postJsonAutoCookie(ApiConfig.getApi() + "get_mobile_verification_code", jsonObject.toString()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -202,7 +204,7 @@ public class ApiUtils {
             jsonObject.addProperty("invitecode", invitecode);
             jsonObject.addProperty("timestamp", System.currentTimeMillis());
 
-            return backData(OkHttpUtils.postJson(ApiConfig.getApi() + "register", jsonObject.toString()));
+            return backData(OkHttpUtils.postJsonAutoCookie(ApiConfig.getApi() + "register", jsonObject.toString()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -218,7 +220,7 @@ public class ApiUtils {
             jsonObject.addProperty("type", type);
             jsonObject.addProperty("timestamp", System.currentTimeMillis());
 
-            return backData(OkHttpUtils.postJson(ApiConfig.getApi() + "get_email_verification_code", jsonObject.toString()));
+            return backData(OkHttpUtils.postJsonAutoCookie(ApiConfig.getApi() + "get_email_verification_code", jsonObject.toString()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -312,7 +314,7 @@ public class ApiUtils {
             jsonObject.addProperty("type", type);
             jsonObject.addProperty("timestamp", System.currentTimeMillis());
 
-            return backData(OkHttpUtils.postJson(ApiConfig.getApi() + "retrieve_password", jsonObject.toString()));
+            return backData(OkHttpUtils.postJsonAutoCookie(ApiConfig.getApi() + "retrieve_password", jsonObject.toString()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -403,7 +405,7 @@ public class ApiUtils {
             jsonObject.addProperty("code", code);
             jsonObject.addProperty("timestamp", System.currentTimeMillis());
 
-            return backData(OkHttpUtils.postJson(ApiConfig.getApi() + "modify_user_email", jsonObject.toString()));
+            return backData(OkHttpUtils.postJsonAutoCookie(ApiConfig.getApi() + "modify_user_email", jsonObject.toString()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -420,7 +422,7 @@ public class ApiUtils {
             jsonObject.addProperty("code", code);
             jsonObject.addProperty("timestamp", System.currentTimeMillis());
 
-            return backData(OkHttpUtils.postJson(ApiConfig.getApi() + "modify_user_phone", jsonObject.toString()));
+            return backData(OkHttpUtils.postJsonAutoCookie(ApiConfig.getApi() + "modify_user_phone", jsonObject.toString()));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
