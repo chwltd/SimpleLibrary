@@ -441,7 +441,8 @@ public class SimpleStatusLayout extends LinearLayout {
     }
 
     private void hideView() {
-        currentView.setVisibility(GONE);
+
+        if(currentView != null)currentView.setVisibility(GONE);
         statusRootView.setVisibility(GONE);
         listener.onHideEvent();
     }
